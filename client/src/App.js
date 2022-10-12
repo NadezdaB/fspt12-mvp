@@ -7,10 +7,10 @@ import Station from "./components/Station";
 function App() {
   return (
     <div className="App">
-        <Link to="/journey">Journey</Link>
+        <Link to="/journeys">Journey</Link>
         <Link to="/stations">Bike Stations</Link>   
      <Routes>
-      <Route path="/journey" element={<Journey />}/>
+      <Route path="/journeys" element={<Journey />}/>
       <Route path="/stations" element={<Station />}/>
      </Routes>
 
