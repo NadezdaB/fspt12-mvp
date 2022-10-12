@@ -1,15 +1,15 @@
-CREATE TABLE `Bike stations`(
+DROP TABLE if exists `Bike_stations`;
+CREATE TABLE `Bike_stations`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `Name` TEXT NOT NULL,
     `Address` TEXT NOT NULL,
     `x_coord` DECIMAL(8, 2) NOT NULL,
     `y_coord` DECIMAL(8, 2) NOT NULL,
-    `station ID` INT NOT NULL
+    `station ID` INT NOT NULL, 
+     PRIMARY KEY(id)
 );
-ALTER TABLE
-    `Bike stations` ADD PRIMARY KEY `bike stations_id_primary`(`id`);
-ALTER TABLE
-    `Bike stations` ADD UNIQUE `bike stations_station id_unique`(`station ID`);
+
+DROP TABLE if exists `Journey_data`;
 CREATE TABLE `Journey_data`(
     `id` INT NOT NULL AUTO_INCREMENT,
     `departureTime` DATETIME NOT NULL,
@@ -17,7 +17,6 @@ CREATE TABLE `Journey_data`(
     `departureStationID` INT NOT NULL,
     `returnStationID` INT NOT NULL,
     `CoveredDistance(m)` BIGINT NOT NULL,
-    `Duration(sec)` BIGINT NOT NULL
+    `Duration(sec)` BIGINT NOT NULL,
+    PRIMARY KEY (id)
 );
-ALTER TABLE
-    `Journey_data` ADD PRIMARY KEY `journey_data_id_primary`(`id`);

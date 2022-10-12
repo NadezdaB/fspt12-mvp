@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send( { message: 'Hello from the backend' });
+router.get('', function(req, res, next) {
+  res.send( { message: 'Welcome to the Helsinki City Bike App!' });
 });
 
 module.exports = router;
