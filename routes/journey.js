@@ -5,7 +5,7 @@ const db = require("../model/helper");
 async function getJourneys() {
 
   try {
-    let journeys = await db("SELECT * from journey_data LIMIT 20;");
+    let journeys = await db("SELECT * from journey_data;");
     return journeys.data;
   }
   catch (err) {

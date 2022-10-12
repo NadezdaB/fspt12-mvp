@@ -5,7 +5,7 @@ const db = require("../model/helper");
 /* GET stations listing. */
 router.get('/', function(req, res, next) {
   //res.send({message: 'Welcome to the stations statistics!'});
-  db("SELECT * FROM bike_stations LIMIT 20;")
+  db("SELECT * FROM bike_stations;")
   .then(results => {
     res.send(results.data);
   })
