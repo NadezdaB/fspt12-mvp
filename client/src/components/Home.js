@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 export default function Home() {
 
+
     // DEPARTURE station variables and states
 const [depStationID, setDepStationID] = useState();
 const [depStationName, setDepStationName] = useState("");
@@ -53,11 +54,45 @@ function handleDuration (e) {
     setDuration(e.target.value);
 }
 
+// const columns = [
+//     { accessor: 'id', label: 'ID' },
+//     { accessor: 'departureTime', label: 'Depature time' },
+//     { accessor: 'returnTime', label: 'Return time' },
+//     { accessor: 'departureStationID', label: 'Departure station ID' },
+//     { accessor: 'returnStationID', label: 'Return station ID'},
+//     { accessor: 'CoveredDistance(m)', label: 'Covered distance(m)'},
+//     { accessor: 'Duration(sec)', label: 'Duration(sec)'}
+//   ]
 
+var depDate = new Date(depTime);
+var retDate = new Date(retTime);
+  const journey = {
+    'departureTime': depDate,
+    'returnTime' : retDate,
+    'departureStationID': parseInt(depStationID),
+    'returnStationID': parseInt(retStationID),
+    'CoveredDistance': parseInt(distance),
+    'Duration': parseInt(duration)
+}
 
+const addJourney = () => {
+    fetch("/journeys", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      //body: JSON.stringify({ input: journey }) // pass here what backend is expecting
+       body: JSON.stringify(journey)
+    })
+    //   // Continue fetch request here
+    //   .then(res => res.json())
+    //   .then(json => setJourney(json));
+  };
 
 function handleSubmit (e) {
     e.preventDefault();
+    addJourney();
+
 }
 
 
@@ -112,7 +147,7 @@ function handleSubmit (e) {
                     <input onChange={(e) => handleDuration(e)} value={duration}/>
                 </label>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Add your bike journey to the database</button>
             </form>
             
             

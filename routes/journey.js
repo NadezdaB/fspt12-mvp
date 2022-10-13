@@ -21,4 +21,19 @@ router.get('/', async (req, res) => {
   res.send(journeys);
   });
 
+ // POST a new journey submitted by the user 
+ router.post('/', async(req,res) => {
+  console.log(req.body);
+  let {departureStationID,returnStationID,CoveredDistance,Duration} = req.body;
+  console.log(typeof(Duration));
+  await db(`INSERT INTO journey_data (departureStationID, returnStationID, CoveredDistance, Duration) VALUES (${departureStationID}, ${returnStationID}, ${CoveredDistance}, ${Duration});`);
+  
+  res.send("Journey added successfully!");
+ })  
+
+ router.delete('/', async(req,res) => {
+  console.log(req.body);
+
+ })
+
 module.exports = router;

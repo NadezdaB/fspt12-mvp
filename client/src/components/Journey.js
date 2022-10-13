@@ -3,8 +3,8 @@ import { Table } from "./Table"
 
 export default function Journey() {
 
-  const [journey, setJourneys] = useState([]);
-
+  const [journeys, setJourneys] = useState([]);
+  
    useEffect(() => {
     getJourneys();
    }, []);
@@ -23,22 +23,24 @@ export default function Journey() {
    });
    }
 
-   console.log("This is a journey object: ", journey[0]);
+   console.log("This is a journey object: ", journeys[0]);
+
    const columns = [
     { accessor: 'id', label: 'ID' },
     { accessor: 'departureTime', label: 'Depature time' },
     { accessor: 'returnTime', label: 'Return time' },
     { accessor: 'departureStationID', label: 'Departure station ID' },
     { accessor: 'returnStationID', label: 'Return station ID'},
-    { accessor: 'CoveredDistance(m)', label: 'Covered distance(m)'},
-    { accessor: 'Duration(sec)', label: 'Duration(sec)'}
+    { accessor: 'CoveredDistance', label: 'Covered distance(m)'},
+    { accessor: 'Duration', label: 'Duration(sec)'}
   ]
 
   return (
+
     <div>Journey
   
     <h1>Table of journeys </h1>   
-      <Table rows={journey} columns={columns} />  
+      <Table rows={journeys} columns={columns} />  
       
     </div>
   )
