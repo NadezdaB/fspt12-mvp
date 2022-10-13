@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
   console.log(typeof(Duration));
   await db(`INSERT INTO journey_data (departureStationID, returnStationID, CoveredDistance, Duration) VALUES (${departureStationID}, ${returnStationID}, ${CoveredDistance}, ${Duration});`);
   
-  res.send("Journey added successfully!");
+  res.send({message: "Journey added successfully!"});
  })  
 
  router.delete('/', async(req,res) => {

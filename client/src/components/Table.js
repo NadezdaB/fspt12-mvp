@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
-import { sortRows, filterRows, paginateRows } from './helpers'
+import { sortRows, filterRows, paginateRows, highlight} from './helpers'
 import { Pagination } from './Pagination'
+import "../App.css"
 
 export const Table = ({ columns, rows }) => {
   const [activePage, setActivePage] = useState(1)
@@ -47,9 +48,13 @@ export const Table = ({ columns, rows }) => {
     setFilters({})
   }
 
+  //const deleteEvent = () => {
+
+  //}
+  
   return (
     <>
-      <table>
+       <table id="table_to_highlight">
         <thead>
           <tr>
             {columns.map((column) => {
@@ -90,7 +95,7 @@ export const Table = ({ columns, rows }) => {
         <tbody>
           {calculatedRows.map((row) => {
             return (
-              <tr key={row.id}>
+              <tr key={row.id} id={row.id} onClick={() => highlight(row.id)}>
                 {columns.map((column) => {
                   if (column.format) {
                     return <td key={column.accessor}>{column.format(row[column.accessor])}</td>
@@ -119,7 +124,7 @@ export const Table = ({ columns, rows }) => {
         <p>
           <button onClick={clearAll}>Clear all</button>
         </p>
-      </div>
+      </div>    
     </>
   )
 }

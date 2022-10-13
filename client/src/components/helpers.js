@@ -96,4 +96,26 @@ export function sortRows(rows, sort) {
     return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)
   }  
 
-  
+  export function highlight(rowID) {
+   
+    console.log("Row id is ", rowID);
+     // to get the tr tag in the row where we click
+    const row = document.getElementById(rowID);
+    console.log("Row is ", row);
+    row.addEventListener('click', function () {
+    // let item = row.path[1];
+    // let row_value = "";
+    // for (var j=0; j<item.cells.length; j++) {
+    // row_value +=item.cells[j].innerHTML;
+    // row_value += " | ";
+    // }
+
+    // alert(row_value);
+    // Toggle the highlight
+    if (row.classList.contains('highlight')) {
+    row.classList.remove('highlight');
+    } else {
+    row.classList.add('highlight');
+    }
+    });
+  }

@@ -73,9 +73,11 @@ var retDate = new Date(retTime);
     'returnStationID': parseInt(retStationID),
     'CoveredDistance': parseInt(distance),
     'Duration': parseInt(duration)
+    
 }
 
 const addJourney = () => {
+    // add journey data to the journey table
     fetch("/journeys", {
       method: "POST",
       headers: {
@@ -84,9 +86,17 @@ const addJourney = () => {
       //body: JSON.stringify({ input: journey }) // pass here what backend is expecting
        body: JSON.stringify(journey)
     })
-    //   // Continue fetch request here
-    //   .then(res => res.json())
-    //   .then(json => setJourney(json));
+  // Continue fetch request here   
+   .then(res => res.json())
+
+
+   // ADD input also to the bike station table if a new station was given (feature to be done later)
+//    fetch("/stations", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+   
   };
 
 function handleSubmit (e) {

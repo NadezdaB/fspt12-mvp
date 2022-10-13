@@ -1,4 +1,4 @@
-export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActivePage }) => {
+export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActivePage, deleteEvent }) => {
     const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1
     const end = activePage === totalPages ? count : beginning + rowsPerPage - 1
   
@@ -17,6 +17,7 @@ export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActi
           <button disabled={activePage === totalPages} onClick={() => setActivePage(totalPages)}>
             Last ⏭️
           </button>
+          <button onClick={() => deleteEvent()}>Delete</button>
         </div>
         <p>
           Page {activePage} of {totalPages}
