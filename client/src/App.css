@@ -14,4 +14,8 @@
 .ride {
       background-color: chartreuse;
 }
+
+.App.leaflet-container {
+      height: 5000px;
+  }
   

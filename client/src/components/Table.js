@@ -120,7 +120,7 @@ export const Table = ({ columns, rows, deleteClick} ) => {
       <div>
         <p>
           <button onClick={clearAll}>Clear all</button>
-          <button onClick={() => deleteClick()}>Delete the selected journey</button>
+          <button onClick={() => deleteClick()}>Delete the selected row</button>
         </p>
       </div>    
     </>
