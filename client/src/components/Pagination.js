@@ -1,7 +1,10 @@
-export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActivePage, deleteEvent }) => {
+// deleteItem is a props that Pagination receives 
+export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActivePage }) => {
     const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1
     const end = activePage === totalPages ? count : beginning + rowsPerPage - 1
-  
+
+    
+
     return (
       <>
         <div className="pagination">
@@ -17,7 +20,6 @@ export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActi
           <button disabled={activePage === totalPages} onClick={() => setActivePage(totalPages)}>
             Last ⏭️
           </button>
-          <button onClick={() => deleteEvent()}>Delete</button>
         </div>
         <p>
           Page {activePage} of {totalPages}

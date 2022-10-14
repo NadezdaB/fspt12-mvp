@@ -24,16 +24,20 @@ router.get('/', async (req, res) => {
  // POST a new journey submitted by the user 
  router.post('/', async(req,res) => {
   console.log(req.body);
-  let {departureStationID,returnStationID,CoveredDistance,Duration} = req.body;
+  let {departureStationID, returnStationID, CoveredDistance, Duration, departureTime, returnTime} = req.body;
   console.log(typeof(Duration));
-  await db(`INSERT INTO journey_data (departureStationID, returnStationID, CoveredDistance, Duration) VALUES (${departureStationID}, ${returnStationID}, ${CoveredDistance}, ${Duration});`);
+  console.log(typeof(departureTime));
+  await db(`INSERT INTO journey_data (departureTime, returnTime, departureStationID, returnStationID, CoveredDistance, Duration) VALUES ("${departureTime}","${returnTime}", ${departureStationID}, ${returnStationID}, ${CoveredDistance}, ${Duration});`);
   
   res.send({message: "Journey added successfully!"});
  })  
 
- router.delete('/', async(req,res) => {
-  console.log(req.body);
-
+ router.delete('/:journeyID', async(req,res) => {
+  console.log(req.params);
+  console.log("Journey to be deleted is: ", req.params.journeyID);
+  await db(`DELETE FROM journey_data WHERE id = ${req.params.journeyID};`);
+  const journeys = await getJourneys();
+  res.send(journeys);
  })
 
 module.exports = router;

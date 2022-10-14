@@ -3,7 +3,7 @@ import { sortRows, filterRows, paginateRows, highlight} from './helpers'
 import { Pagination } from './Pagination'
 import "../App.css"
 
-export const Table = ({ columns, rows }) => {
+export const Table = ({ columns, rows, deleteClick} ) => {
   const [activePage, setActivePage] = useState(1)
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
@@ -48,10 +48,7 @@ export const Table = ({ columns, rows }) => {
     setFilters({})
   }
 
-  //const deleteEvent = () => {
-
-  //}
-  
+   
   return (
     <>
        <table id="table_to_highlight">
@@ -92,7 +89,7 @@ export const Table = ({ columns, rows }) => {
             })}
           </tr>
         </thead>
-        <tbody>
+        <tbody id='table'>
           {calculatedRows.map((row) => {
             return (
               <tr key={row.id} id={row.id} onClick={() => highlight(row.id)}>
@@ -123,6 +120,7 @@ export const Table = ({ columns, rows }) => {
       <div>
         <p>
           <button onClick={clearAll}>Clear all</button>
+          <button onClick={() => deleteClick()}>Delete the selected journey</button>
         </p>
       </div>    
     </>

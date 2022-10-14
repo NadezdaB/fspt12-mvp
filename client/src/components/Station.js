@@ -33,7 +33,8 @@ const columns = [
 
 
   return (
-    <div>Table of the bike stations
+    <div>
+      <h1>Table of the bike stations</h1>
  
       <Table rows={station} columns={columns} />
 

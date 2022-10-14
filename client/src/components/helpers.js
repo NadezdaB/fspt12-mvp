@@ -84,7 +84,7 @@ export function sortRows(rows, sort) {
         }
   
         if (isNumber(value)) {
-          return value == searchValue
+          return value === searchValue
         }
   
         return false
@@ -103,14 +103,7 @@ export function sortRows(rows, sort) {
     const row = document.getElementById(rowID);
     console.log("Row is ", row);
     row.addEventListener('click', function () {
-    // let item = row.path[1];
-    // let row_value = "";
-    // for (var j=0; j<item.cells.length; j++) {
-    // row_value +=item.cells[j].innerHTML;
-    // row_value += " | ";
-    // }
 
-    // alert(row_value);
     // Toggle the highlight
     if (row.classList.contains('highlight')) {
     row.classList.remove('highlight');
@@ -118,4 +111,7 @@ export function sortRows(rows, sort) {
     row.classList.add('highlight');
     }
     });
+    
   }
+
+  

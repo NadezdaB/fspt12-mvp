@@ -21,7 +21,22 @@ export default function Journey() {
     console.log(error);
     
    });
-   }
+   }   
+
+   const deleteJourney = async () => {
+   // find id with class "highlight"
+   const row = document.getElementsByClassName('highlight');
+   console.log("This is the row to be deleted", row);
+   console.log("This is id of the row to be deleted", row[0].getAttribute('id'));
+   let rowID = row[0].getAttribute('id');
+   // delete a journey from the database
+  const response = await fetch(`/journeys/${rowID}`, {
+    method: "DELETE"    
+   });   
+     const journey = await response.json();
+     setJourneys(journey); 
+     alert("Journey deleted successfully!");   
+   } 
 
    console.log("This is a journey object: ", journeys[0]);
 
@@ -37,11 +52,10 @@ export default function Journey() {
 
   return (
 
-    <div>Journey
+    <div>
   
     <h1>Table of journeys </h1>   
-      <Table rows={journeys} columns={columns} />  
-      
+      <Table rows={journeys} columns={columns} deleteClick={deleteJourney}/>  
     </div>
   )
 }

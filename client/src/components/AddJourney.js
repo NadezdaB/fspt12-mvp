@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-export default function Home() {
+export default function AddJourney() {
 
 
     // DEPARTURE station variables and states
@@ -64,11 +64,13 @@ function handleDuration (e) {
 //     { accessor: 'Duration(sec)', label: 'Duration(sec)'}
 //   ]
 
-var depDate = new Date(depTime);
-var retDate = new Date(retTime);
+//var depDate = new Date(depTime);
+//var retDate = new Date(retTime);
+
+
   const journey = {
-    'departureTime': depDate,
-    'returnTime' : retDate,
+    'departureTime': depTime,
+    'returnTime' : retTime,
     'departureStationID': parseInt(depStationID),
     'returnStationID': parseInt(retStationID),
     'CoveredDistance': parseInt(distance),
@@ -108,7 +110,7 @@ function handleSubmit (e) {
 
   return (
     <div>
-        <h1>Welcome to the Helsinki City Bike App!</h1>
+        <h1>Add Your bike journey!</h1>
 
         <div className="row">
            <div className='col 3'>
@@ -125,7 +127,7 @@ function handleSubmit (e) {
                 </label> 
 
                 <label>Departure time
-                 <input onChange={(e)=>handleTimeDep(e)} value={depTime}/>
+                 <input type="datetime-local" onChange={(e)=>handleTimeDep(e)} value={depTime}/>  
                 </label>
 
             </div>
@@ -138,11 +140,26 @@ function handleSubmit (e) {
                 </label>
 
                 <label>Return station name
-                    <input onChange={(e) => handleNameRet(e)} value={retStationName}/>
+                    <input onChange={(e) => handleNameRet(e)} value={retStationName}/>                     
                 </label> 
+{/* 
+                <label for="lang">Language</label>
+                <select name="languages" id="lang">
+                    <option value="javascript">Select a language</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="php">PHP</option>
+                    <option value="java">Java</option>
+                    <option value="golang">Golang</option>
+                    <option value="python">Python</option>
+                    <option value="c#">C#</option>
+                    <option value="C++">C++</option>
+                    <option value="erlang">Erlang</option>
+                </select> */}
+
+
                 
                 <label>Return time
-                 <input onChange={(e)=>handleTimeRet(e)} value={retTime}/>
+                 <input type="datetime-local" onChange={(e)=>handleTimeRet(e)} value={retTime}/>
                 </label>     
 
             </div>
