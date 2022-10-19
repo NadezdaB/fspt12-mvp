@@ -3,7 +3,7 @@ import { sortRows, filterRows, paginateRows, highlight} from './helpers'
 import { Pagination } from './Pagination'
 import "../App.css"
 
-export const Table = ({ columns, rows, deleteClick} ) => {
+export const Table = ({ columns, rows, deleteClick, showStats} ) => {
   const [activePage, setActivePage] = useState(1)
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
@@ -66,7 +66,7 @@ export const Table = ({ columns, rows, deleteClick} ) => {
                 }
               }
               return (
-                <th key={column.accessor}>
+                <th key={column.accessor} id={column.accessor}>
                   <span>{column.label}</span>
                   <button onClick={() => handleSort(column.accessor)}>{sortIcon()}</button>
                 </th>
@@ -121,6 +121,7 @@ export const Table = ({ columns, rows, deleteClick} ) => {
         <p>
           <button onClick={clearAll}>Clear all</button>
           <button onClick={() => deleteClick()}>Delete the selected row</button>
+          <button onClick={() => showStats()}>Show statistics</button>
         </p>
       </div>    
     </>

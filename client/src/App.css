@@ -18,4 +18,9 @@
 .App.leaflet-container {
       height: 5000px;
   }
+
+.plot {
+      height: 500px;
+      
+} 
   

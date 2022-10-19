@@ -113,6 +113,7 @@ export default function Bikerider(props) {
               position={[station.y_coord, station.x_coord]}>
               <Popup>
                 {station.Name} <br />
+                Capacity {station.capacity} bikes
               </Popup>
             </Marker>
           ))}

@@ -1,5 +1,7 @@
 import React, {useEffect, useState } from 'react'
 import { Table } from "./Table"
+import Plotly from 'plotly.js-dist-min';
+import '../App.css'
 
 export default function Journey() {
 
@@ -16,16 +18,43 @@ export default function Journey() {
     .then(json => {
       console.log(json);
       setJourneys(json);
-   })
+    })      
+  
    .catch(error => {
     console.log(error);
     
    });
    }   
 
+   const showStatistics = async () => {
+
+    var xArray = journeys.map(journey => journey.CoveredDistance);
+    var yArray = journeys.map(journey => journey.id);
+    console.log("Xarray", xArray);
+    console.log(yArray);
+    // Define Data
+    var data = [{
+      x: xArray,
+      y: yArray,
+      mode:"markers",
+      type:"histogram"
+    }];
+
+    // Define Layout
+    var layout = {
+      xaxis: {range: [0, 10000], title: "Covered distance, m"},
+      yaxis: {range: [0, 20000], title: "Number of occurrences"},
+      title: "Covered distances, histogram"
+    };
+
+    Plotly.newPlot('plotDistance',data, layout);
+
+   }
+
+
    const deleteJourney = async () => {
    // find id with class "highlight"
-   const row = document.getElementsByClassName('highlight');
+   const row = document.getElementsByIdClassName('highlight');
    console.log("This is the row to be deleted", row);
    console.log("This is id of the row to be deleted", row[0].getAttribute('id'));
    let rowID = row[0].getAttribute('id');
@@ -55,7 +84,8 @@ export default function Journey() {
     <div>
   
     <h1>Table of journeys </h1>   
-      <Table rows={journeys} columns={columns} deleteClick={deleteJourney}/>  
+      <Table rows={journeys} columns={columns} deleteClick={deleteJourney} showStats={showStatistics}/>
+      <div id='plotDistance' class='plot'>This is my plot</div>  
     </div>
   )
 }
