@@ -14,7 +14,6 @@ function App() {
       <div className='row'>
         <div className='container col-4 statistics'>
           <p>See statistics </p>
-          <bg-image src="../img/bike1.jpg"></bg-image>
           
           <Link to="/journeys">Journey</Link>
           <br></br>
