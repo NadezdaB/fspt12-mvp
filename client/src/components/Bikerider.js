@@ -13,7 +13,7 @@ export default function Bikerider() {
   function MoveMapOnClick() {
     let map = useMapEvent('click', (event) => {
         // Center map on click
-        map.flyTo(event.latlng, map.getZoom());  // setView() looks much less cool ;-)
+        map.flyTo(event.latlng, map.getZoom());  // 
         // Make array of two numbers representing lat/lng
         let latLng = [Number(event.latlng.lat.toFixed(4)), Number(event.latlng.lng.toFixed(4))];
         setAddress(latLng);
@@ -21,19 +21,9 @@ export default function Bikerider() {
 }
 
 
-console.log("LatLon of the clicked point are ", address[0], address[1]);
-  
+console.log("LatLon of the clicked point are ", address[0], address[1]); 
 
-    // // Called when user clicks on the map
-    // async function latLngToAddress(latLng) {
-    //     let myresponse = await revgeocode(latLng);
-    //     console.log("This is latLngtoAddress when clicked on the map", address);
-    //     if (myresponse.ok) {
-    //         // Display formatted address returned by OpenCage as well as lat/lng
-    //         let latlngstr = 'Latitude/Longitude: ' + latLng.join('/');
-    //         setAddress(myresponse.data.formatted_address + ', ' + latlngstr);
-    //     }
-    // }
+    
 
    useEffect(() => {
     getStations();
@@ -80,15 +70,9 @@ console.log("LatLon of the clicked point are ", address[0], address[1]);
    }
 
     return (
-      <>
-            <div className="row">
-                <div className="col">
-                    <h3 className="mb-5">Click on the Map!</h3>                    
-                </div>                
-            </div>
-      
+      <>      
 
-      <h1>Find the closest bike stations nearby</h1>
+      <h2 className='text-center'>Click on the map where you are and find the closest bike stations nearby</h2>
       <label> Within how many meters would you like to display the stations?
         <input value={bounds} onChange={(e) => handleBounds(e)} />
         <button type="submit" onClick={(e) => handleSubmit(e)}>Show me the closest bike stations</button>
@@ -100,7 +84,16 @@ console.log("LatLon of the clicked point are ", address[0], address[1]);
        zoom={13} 
        scrollWheelZoom={true}       
        >
+
         <MoveMapOnClick />
+            <Marker
+                  key="clicked"
+                  position={[address[0], address[1]]}>
+                  <Popup>
+                    You clicked here!                     
+                  </Popup>
+            </Marker>
+        
 
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
