@@ -1,15 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 export default function AddJourney() {
 
-
     // DEPARTURE station variables and states
-const [depStationID, setDepStationID] = useState();
 const [depStationName, setDepStationName] = useState("");
 const [depTime, setDepTime] = useState();
 
    // RETURN station variables and states
-const [retStationID, setRetStationID] = useState();
 const [retStationName, setRetStationName] = useState("");
 const [retTime, setRetTime] = useState();
 
@@ -18,11 +15,24 @@ const [retTime, setRetTime] = useState();
 const [distance, setDistance] = useState();
 const [duration, setDuration] = useState();
 
+// LOAD Station information from station DB table
 
-// DEPARTURE station related functions
-function handleIDdep (e) {
-    setDepStationID(e.target.value);
+const [stations, setStations] = useState([]);
+useEffect( () => getStations(), []);
+
+const getStations = () => {
+
+ fetch('/stations')
+ .then(res => res.json())
+ .then(json => {
+   console.log(json);
+   setStations(json)
+})
+.catch(error => {
+ console.log(error);
+});
 }
+
 
 function handleNameDep (e) {
     setDepStationName(e.target.value);
@@ -32,9 +42,6 @@ function handleTimeDep (e) {
     setDepTime(e.target.value);
 }
 // RETURN station related functions
-function handleIDret (e) {
-    setRetStationID(e.target.value);
-}
 
 function handleNameRet (e) {
     setRetStationName(e.target.value);
@@ -54,28 +61,13 @@ function handleDuration (e) {
     setDuration(e.target.value);
 }
 
-// const columns = [
-//     { accessor: 'id', label: 'ID' },
-//     { accessor: 'departureTime', label: 'Depature time' },
-//     { accessor: 'returnTime', label: 'Return time' },
-//     { accessor: 'departureStationID', label: 'Departure station ID' },
-//     { accessor: 'returnStationID', label: 'Return station ID'},
-//     { accessor: 'CoveredDistance(m)', label: 'Covered distance(m)'},
-//     { accessor: 'Duration(sec)', label: 'Duration(sec)'}
-//   ]
-
-//var depDate = new Date(depTime);
-//var retDate = new Date(retTime);
-
-
   const journey = {
     'departureTime': depTime,
     'returnTime' : retTime,
-    'departureStationID': parseInt(depStationID),
-    'returnStationID': parseInt(retStationID),
+    'departureStationName' : depStationName,
+    'returnStationName' : retStationName,
     'CoveredDistance': parseInt(distance),
-    'Duration': parseInt(duration)
-    
+    'Duration': parseInt(duration)    
 }
 
 const addJourney = () => {
@@ -91,15 +83,10 @@ const addJourney = () => {
   // Continue fetch request here   
    .then(res => res.json())
 
+   alert("Journey added successfully!");
 
-   // ADD input also to the bike station table if a new station was given (feature to be done later)
-//    fetch("/stations", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
+}
    
-  };
 
 function handleSubmit (e) {
     e.preventDefault();
@@ -116,14 +103,16 @@ function handleSubmit (e) {
            <div className='col 3'>
             <form onSubmit={handleSubmit}>
             <div className='form-group'>
-                <p>Departure information</p>
-
-                <label>Departure station ID
-                 <input onChange={(e)=>handleIDdep(e)} value={depStationID}/>
-                </label>
+                <p>Departure information</p>                
 
                 <label>Departure station name
-                    <input onChange={(e) => handleNameDep(e)} value={depStationName}/>
+                    <select name="station name" onChange={(e) => handleNameDep(e)} value={depStationName}>
+                    
+                    {stations.map((station) => (                        
+                        <option value={station.Name}>{station.Name}</option>
+                    ))}       
+
+                    </select>                    
                 </label> 
 
                 <label>Departure time
@@ -134,27 +123,17 @@ function handleSubmit (e) {
 
             <div className='form-group'>
             
-                <p>Return information</p>
-                <label>Return station ID
-                 <input onChange={(e)=>handleIDret(e)} value={retStationID}/>
-                </label>
+                <p>Return information</p>                
 
                 <label>Return station name
-                    <input onChange={(e) => handleNameRet(e)} value={retStationName}/>                     
-                </label> 
-{/* 
-                <label for="lang">Language</label>
-                <select name="languages" id="lang">
-                    <option value="javascript">Select a language</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="php">PHP</option>
-                    <option value="java">Java</option>
-                    <option value="golang">Golang</option>
-                    <option value="python">Python</option>
-                    <option value="c#">C#</option>
-                    <option value="C++">C++</option>
-                    <option value="erlang">Erlang</option>
-                </select> */}
+                    <select name="station name" onChange={(e) => handleNameRet(e)} value={retStationName}>
+                    
+                    {stations.map((station) => (                        
+                        <option value={station.Name}>{station.Name}</option>
+                    ))}     
+
+                    </select>                    
+                </label>          
 
 
                 

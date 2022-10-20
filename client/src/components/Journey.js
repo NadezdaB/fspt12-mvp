@@ -3,6 +3,7 @@ import { Table } from "./Table"
 import Plotly from 'plotly.js-dist-min';
 import '../App.css'
 
+
 export default function Journey() {
 
   const [journeys, setJourneys] = useState([]);
@@ -55,7 +56,6 @@ export default function Journey() {
    const deleteJourney = async () => {
    // find id with class "highlight"
    const row = document.getElementsByIdClassName('highlight');
-   console.log("This is the row to be deleted", row);
    console.log("This is id of the row to be deleted", row[0].getAttribute('id'));
    let rowID = row[0].getAttribute('id');
    // delete a journey from the database
@@ -71,10 +71,10 @@ export default function Journey() {
 
    const columns = [
     { accessor: 'id', label: 'ID' },
-    { accessor: 'departureTime', label: 'Depature time' },
+    { accessor: 'departureTime', label: 'Depature time'},
     { accessor: 'returnTime', label: 'Return time' },
-    { accessor: 'departureStationID', label: 'Departure station ID' },
-    { accessor: 'returnStationID', label: 'Return station ID'},
+    { accessor: 'departureStationName', label: 'Departure station name' },
+    { accessor: 'returnStationName', label: 'Return station name'},
     { accessor: 'CoveredDistance', label: 'Covered distance(m)'},
     { accessor: 'Duration', label: 'Duration(sec)'}
   ]
@@ -85,7 +85,7 @@ export default function Journey() {
   
     <h1>Table of journeys </h1>   
       <Table rows={journeys} columns={columns} deleteClick={deleteJourney} showStats={showStatistics}/>
-      <div id='plotDistance' class='plot'>This is my plot</div>  
+      <div id='plotDistance' className='plot'>This is my plot</div>  
     </div>
   )
 }

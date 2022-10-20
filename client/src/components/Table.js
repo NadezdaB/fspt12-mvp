@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react'
-import { sortRows, filterRows, paginateRows, highlight} from './helpers'
+import { sortRows, filterRows, paginateRows, highlight} from '../helpers/helptable.js'
 import { Pagination } from './Pagination'
 import "../App.css"
+const { DateTime } = require("luxon");
+
 
 export const Table = ({ columns, rows, deleteClick, showStats} ) => {
   const [activePage, setActivePage] = useState(1)
@@ -94,14 +96,13 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
             return (
               <tr key={row.id} id={row.id} onClick={() => highlight(row.id)}>
                 {columns.map((column) => {
-                  if (column.format) {
-                    return <td key={column.accessor}>{column.format(row[column.accessor])}</td>
-                  }
-                  return <td key={column.accessor}>{row[column.accessor]}</td>
-                })}
+                if((column.accessor==='departureTime')||(column.accessor==="returnTime")) {
+                    return <td key={column.accessor}>{DateTime.fromISO(row[column.accessor]).toFormat('yyyy LLL dd HH:mm')}</td>
+                  } else {                        
+                    return <td key={column.accessor}>{row[column.accessor]}</td>
+                }})}
               </tr>
-            )
-          })}
+            )})}
         </tbody>
       </table>
 

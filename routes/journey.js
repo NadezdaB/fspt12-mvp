@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
-const { DateTime } = require("luxon");
 
 async function getJourneys() {
 
@@ -32,10 +31,11 @@ router.get('/', async (req, res) => {
  // POST a new journey submitted by the user 
  router.post('/', async(req,res) => {
   console.log(req.body);
-  let {departureStationID, returnStationID, CoveredDistance, Duration, departureTime, returnTime} = req.body;
-  console.log(typeof(Duration));
-  console.log(typeof(departureTime));
-  await db(`INSERT INTO journey_data (departureTime, returnTime, departureStationID, returnStationID, CoveredDistance, Duration) VALUES ("${departureTime}","${returnTime}", ${departureStationID}, ${returnStationID}, ${CoveredDistance}, ${Duration});`);
+  let {departureStationName, returnStationName, CoveredDistance, Duration, departureTime, returnTime} = req.body;
+  // console.log(typeof(Duration));
+  // console.log(typeof(departureTime));
+  
+  await db(`INSERT INTO journey_data (departureTime, returnTime, departureStationName, returnStationName, CoveredDistance, Duration) VALUES ("${departureTime}","${returnTime}", "${departureStationName}", "${returnStationName}", ${CoveredDistance}, ${Duration});`);
   
   res.send({message: "Journey added successfully!"});
  })  

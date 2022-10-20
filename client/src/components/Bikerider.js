@@ -64,10 +64,8 @@ export default function Bikerider(props) {
    .catch(error => {
     console.log(error);
   }); 
-}
+   }
 
-
-   
     return (
       <>
       <div className="Bikerider">
@@ -90,7 +88,7 @@ export default function Bikerider(props) {
             </div>
         </div>
 
-      <h1>Find the closest bike stations nearby</h1>
+      {/* <h1>Find the closest bike stations nearby</h1>
       <label> Within how many meters would you like to display the stations?
         <input value={bounds} onChange={(e) => handleBounds(e)} />
         <button type="submit" onClick={(e) => handleSubmit(e)}>Show me the closest bike stations</button>
@@ -103,7 +101,6 @@ export default function Bikerider(props) {
        scrollWheelZoom={true}
        >
 
-    {/* center={[60.192059, 24.945831]} zoom={13} scrollWheelZoom={true}> */}
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -119,7 +116,8 @@ export default function Bikerider(props) {
           ))}
         </MapContainer>
         </>
-    );
-}
-
-
+    ); */}
+    </>
+  
+)
+  }
