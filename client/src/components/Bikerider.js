@@ -1,28 +1,39 @@
 import React, {useState, useEffect} from 'react';
 import "./Bikerider.css";
-import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
-import ClickableMap from './ClickableMap';
-import { revgeocode } from '../helpers/geo-opencage';
-import { breakAddr } from '../helpers/utils';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvent} from 'react-leaflet';
 import { getDistance } from 'geolib';
 
-export default function Bikerider(props) {
+export default function Bikerider() {
 
   const [stations, setStations] = useState([]);
   const [bounds, setBounds] = useState([]);
   const [filterStations, setFilterStations] = useState([]);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState([]);
 
-    // Called when user clicks on the map
-    async function latLngToAddress(latLng) {
-        let myresponse = await revgeocode(latLng);
-        console.log("This is latLngtoAddress when clicked on the map", address);
-        if (myresponse.ok) {
-            // Display formatted address returned by OpenCage as well as lat/lng
-            let latlngstr = 'Latitude/Longitude: ' + latLng.join('/');
-            setAddress(myresponse.data.formatted_address + ', ' + latlngstr);
-        }
-    }
+  function MoveMapOnClick() {
+    let map = useMapEvent('click', (event) => {
+        // Center map on click
+        map.flyTo(event.latlng, map.getZoom());  // setView() looks much less cool ;-)
+        // Make array of two numbers representing lat/lng
+        let latLng = [Number(event.latlng.lat.toFixed(4)), Number(event.latlng.lng.toFixed(4))];
+        setAddress(latLng);
+    });    
+}
+
+
+console.log("LatLon of the clicked point are ", address[0], address[1]);
+  
+
+    // // Called when user clicks on the map
+    // async function latLngToAddress(latLng) {
+    //     let myresponse = await revgeocode(latLng);
+    //     console.log("This is latLngtoAddress when clicked on the map", address);
+    //     if (myresponse.ok) {
+    //         // Display formatted address returned by OpenCage as well as lat/lng
+    //         let latlngstr = 'Latitude/Longitude: ' + latLng.join('/');
+    //         setAddress(myresponse.data.formatted_address + ', ' + latlngstr);
+    //     }
+    // }
 
    useEffect(() => {
     getStations();
@@ -36,7 +47,9 @@ export default function Bikerider(props) {
    
    getDistance(
       { latitude: station.y_coord, longitude: station.x_coord },
-      { latitude: 60.192059, longitude: 24.945831 }
+      { latitude: address[0], longitude: address[1] }
+
+      //{ latitude: 60.192059, longitude: 24.945831 }
   );
   return station;
 });
@@ -68,38 +81,26 @@ export default function Bikerider(props) {
 
     return (
       <>
-      <div className="Bikerider">
             <div className="row">
                 <div className="col">
-                    <h3 className="mb-5">Click on the Map!</h3>
-                    {
-                        address && (
-                            <>
-                                <h4>You clicked here:</h4>
-                                <p>{ breakAddr(address) }</p>
-                            </>
-                        )
-                    }
-                </div>
-
-                <div className="col">
-                    {props.home && <ClickableMap revGeocodeCb={latLngToAddress} home={props.home} zoom={6} />}
-                </div>
+                    <h3 className="mb-5">Click on the Map!</h3>                    
+                </div>                
             </div>
-        </div>
+      
 
-      {/* <h1>Find the closest bike stations nearby</h1>
+      <h1>Find the closest bike stations nearby</h1>
       <label> Within how many meters would you like to display the stations?
         <input value={bounds} onChange={(e) => handleBounds(e)} />
         <button type="submit" onClick={(e) => handleSubmit(e)}>Show me the closest bike stations</button>
       </label>
       
       <MapContainer 
-       className="ClickableMap" 
+       className="Bikerider" 
        center={[60.192059, 24.945831]} 
        zoom={13} 
-       scrollWheelZoom={true}
+       scrollWheelZoom={true}       
        >
+        <MoveMapOnClick />
 
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -114,10 +115,9 @@ export default function Bikerider(props) {
               </Popup>
             </Marker>
           ))}
-        </MapContainer>
-        </>
-    ); */}
-    </>
-  
-)
+           
+      </MapContainer>      
+ 
+    </> 
+    ) 
   }

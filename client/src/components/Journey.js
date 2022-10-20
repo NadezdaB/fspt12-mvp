@@ -55,7 +55,7 @@ export default function Journey() {
 
    const deleteJourney = async () => {
    // find id with class "highlight"
-   const row = document.getElementsByIdClassName('highlight');
+   const row = document.getElementsByClassName('highlight');
    console.log("This is id of the row to be deleted", row[0].getAttribute('id'));
    let rowID = row[0].getAttribute('id');
    // delete a journey from the database
@@ -83,7 +83,7 @@ export default function Journey() {
 
     <div>
   
-    <h1>Table of journeys </h1>   
+    <h1 className='text-center'>Table of journeys </h1>   
       <Table rows={journeys} columns={columns} deleteClick={deleteJourney} showStats={showStatistics}/>
       <div id='plotDistance' className='plot'>This is my plot</div>  
     </div>
