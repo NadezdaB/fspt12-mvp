@@ -83,9 +83,21 @@ export default function Journey() {
 
     <div>
   
-    <h1 className='text-center'>Table of journeys </h1>   
-      <Table rows={journeys} columns={columns} deleteClick={deleteJourney} showStats={showStatistics}/>
-      <div id='plotDistance' className='plot'>This is my plot</div>  
+    <h2 className='text-center'>Bike journey statistics</h2> 
+    
+    <div className="container text-center">
+      <div className="row">
+
+        <div className="col">
+          <Table rows={journeys} columns={columns} deleteClick={deleteJourney} showStats={showStatistics}/>
+        </div>
+
+       <div className="col">
+        <h2 id='plotDistance' className='plot'>This is my plot</h2> 
+       </div>
+
+       </div>
+    </div>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { Table } from "./Table"
 
 export default function Station() {
 
-  const [station, setStations] = useState([]);
+  const [stations, setStations] = useState([]);
 
    useEffect(() => {
     getStations();
@@ -34,9 +34,21 @@ const columns = [
 
   return (
     <div>
-      <h1>Table of the bike stations</h1>
- 
-      <Table rows={station} columns={columns} />
+      <h2 className='text-center'>Bike stations</h2> 
+    
+    <div className="container text-center">
+      <div className="row">
+
+        <div className="col">
+          <Table rows={stations} columns={columns}/>
+        </div>
+
+       <div className="col">
+        <h2 id='plotDistance' className='plot'>This is my plot</h2> 
+       </div>
+
+       </div>
+    </div>
 
     </div>
   )

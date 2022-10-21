@@ -8,7 +8,27 @@ export default function Bikerider() {
   const [stations, setStations] = useState([]);
   const [bounds, setBounds] = useState([]);
   const [filterStations, setFilterStations] = useState([]);
-  const [address, setAddress] = useState([]);
+  const [address, setAddress] = useState([60.192059, 24.945831]);
+
+  useEffect(() => {
+    getStations();
+   }, []); 
+   
+
+   const getStations = () => {
+    fetch('/stations')
+    .then(res => res.json())
+    .then(json => {
+      console.log(json);
+
+      setStations(json)
+   })
+   .catch(error => {
+    console.log(error);
+  }); 
+   }
+   console.log(stations);
+
 
   function MoveMapOnClick() {
     let map = useMapEvent('click', (event) => {
@@ -18,20 +38,15 @@ export default function Bikerider() {
         let latLng = [Number(event.latlng.lat.toFixed(4)), Number(event.latlng.lng.toFixed(4))];
         setAddress(latLng);
     });    
-}
+  }
 
+//console.log("LatLon of the clicked point are ", address[0], address[1]);     
 
-console.log("LatLon of the clicked point are ", address[0], address[1]); 
-
-    
-
-   useEffect(() => {
-    getStations();
-   }, []);
 
    // this function calculates the distance between two given coordinates in meters
 
    stations.map(station => {
+    console.log("calculating the distances");
     
    station.distances = 
    
@@ -54,24 +69,12 @@ console.log("LatLon of the clicked point are ", address[0], address[1]);
    let filtStations = stations.filter(station => station.distances<=bounds);
    
    setFilterStations(filtStations);
-   }
+   }   
    
-   
-   const getStations = () => {
-   
-    fetch('/stations')
-    .then(res => res.json())
-    .then(json => {
-      setStations(json)
-   })
-   .catch(error => {
-    console.log(error);
-  }); 
-   }
 
     return (
       <>      
-
+        
       <h2 className='text-center'>Click on the map where you are and find the closest bike stations nearby</h2>
       <label> Within how many meters would you like to display the stations?
         <input value={bounds} onChange={(e) => handleBounds(e)} />

@@ -5,15 +5,7 @@ const db = require("../model/helper");
 async function getJourneys() {
 
   try {
-    let journeys = await db("SELECT * from journey_data;");
-    
-    // journeys.data.map(journey => {
-    //   //console.log(journey.departureTime.toLocaleString(DateTime.DATETIME_FULL));
-    //   journey.departureTime = journey.departureTime.toLocaleString(DateTime.DATETIME_FULL); 
-    //   journey.returnTime = journey.returnTime.toLocaleString(DateTime.DATETIME_FULL);
-    //   return journey;
-    // })
-   
+    let journeys = await db("SELECT * from journey_data;");   
     return journeys.data;
   }  catch (err) {
     return err;
@@ -32,9 +24,7 @@ router.get('/', async (req, res) => {
  router.post('/', async(req,res) => {
   console.log(req.body);
   let {departureStationName, returnStationName, CoveredDistance, Duration, departureTime, returnTime} = req.body;
-  // console.log(typeof(Duration));
-  // console.log(typeof(departureTime));
-  
+ 
   await db(`INSERT INTO journey_data (departureTime, returnTime, departureStationName, returnStationName, CoveredDistance, Duration) VALUES ("${departureTime}","${returnTime}", "${departureStationName}", "${returnStationName}", ${CoveredDistance}, ${Duration});`);
   
   res.send({message: "Journey added successfully!"});

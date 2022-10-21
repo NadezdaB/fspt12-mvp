@@ -52,7 +52,8 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
 
    
   return (
-    <>
+    <>  
+    <div>    
        <table id="table_to_highlight">
         <thead>
           <tr>
@@ -118,13 +119,17 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
         <p>No data found</p>
       )}
 
-      <div>
+    </div>  
+    <div>      
+      
         <p>
           <button onClick={clearAll}>Clear all</button>
           <button onClick={() => deleteClick()}>Delete the selected row</button>
           <button onClick={() => showStats()}>Show statistics</button>
         </p>
-      </div>    
+      
+    </div>   
+  
     </>
   )
 }

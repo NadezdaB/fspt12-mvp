@@ -97,16 +97,27 @@ function handleSubmit (e) {
 
   return (
     <div>
-        <h1>Add Your bike journey!</h1>
+        
+        <h2>Add Your bike journey!</h2>
 
-        <div className="row">
-           <div className='col 3'>
+        
             <form onSubmit={handleSubmit}>
-            <div className='form-group'>
-                <p>Departure information</p>                
 
-                <label>Departure station name
-                    <select name="station name" onChange={(e) => handleNameDep(e)} value={depStationName}>
+            <div class="row">
+            <div class="col-sm-6">
+            <div class="card">
+            <div class="card-header">
+            Departure information    
+            </div>
+
+            <div class="card-body">
+
+
+            <div className='form-group'>
+                            
+
+                <label className='form-label'>Departure station name
+                    <select className = "form-select" onChange={(e) => handleNameDep(e)} value={depStationName}>
                     
                     {stations.map((station) => (                        
                         <option value={station.Name}>{station.Name}</option>
@@ -115,18 +126,29 @@ function handleSubmit (e) {
                     </select>                    
                 </label> 
 
-                <label>Departure time
-                 <input type="datetime-local" onChange={(e)=>handleTimeDep(e)} value={depTime}/>  
+                <label className='form-label'>Departure time
+                 <input className = "form-control" type="datetime-local" onChange={(e)=>handleTimeDep(e)} value={depTime}/>  
                 </label>
-
             </div>
 
-            <div className='form-group'>
-            
-                <p>Return information</p>                
+            </div>
+            </div>
+            </div>
+            </div>
 
-                <label>Return station name
-                    <select name="station name" onChange={(e) => handleNameRet(e)} value={retStationName}>
+            <div class="row">
+            <div class="col-sm-6">
+            <div class="card">
+            <div class="card-header">
+            Return information    
+            </div>
+
+            <div class="card-body">
+                           
+               <div className='form-group'>           
+                
+                <label className='form-label'>Return station name
+                    <select className = "form-select" onChange={(e) => handleNameRet(e)} value={retStationName}>
                     
                     {stations.map((station) => (                        
                         <option value={station.Name}>{station.Name}</option>
@@ -137,31 +159,49 @@ function handleSubmit (e) {
 
 
                 
-                <label>Return time
-                 <input type="datetime-local" onChange={(e)=>handleTimeRet(e)} value={retTime}/>
+                <label className='form-label'>Return time
+                 <input className = "form-control" type="datetime-local" onChange={(e)=>handleTimeRet(e)} value={retTime}/>
                 </label>     
 
+              </div>
+
+              </div>
             </div>
+            </div>
+            </div>
+
+
+            <div class="row">
+            <div class="col-sm-6">
+            <div class="card">
+            <div class="card-header">
+            Journey information    
+            </div>
+            <div class="card-body">
 
             <div className='form-group'>
 
-                <p>Journey information</p>
-                <label>Covered distance (m) 
-                    <input onChange={(e) => handleDist(e)} value={distance}/>
+                
+                <label className='form-label'>Covered distance (m) 
+                    <input className = "form-control" onChange={(e) => handleDist(e)} value={distance}/>
                 </label>
-                <label>Duration (sec) 
-                    <input onChange={(e) => handleDuration(e)} value={duration}/>
+                <label className='form-label'>Duration (sec) 
+                    <input className = "form-control" onChange={(e) => handleDuration(e)} value={duration}/>
                 </label>
             </div>
-            <button type="submit">Add your bike journey to the database</button>
-            </form>
+            </div>
+            </div>
+            </div>
+            </div>
             
-            
-            
-            </div>  
+            <button className="btn btn-primary center" type="submit">Add your bike journey to the database</button>
 
-        </div>
+        </form>           
+            
+            
+     </div>  
+       
 
-    </div>
+   
   )
 }
