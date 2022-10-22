@@ -96,21 +96,21 @@ function handleSubmit (e) {
 
 
   return (
-    <div>
+    <div className= "bg-primary">
         
         <h2>Add Your bike journey!</h2>
 
         
             <form onSubmit={handleSubmit}>
 
-            <div class="row">
-            <div class="col-sm-6">
-            <div class="card">
-            <div class="card-header">
+            <div className="row">
+            <div className="col-sm-6">
+            <div className="card">
+            <div className="card-header">
             Departure information    
             </div>
 
-            <div class="card-body">
+            <div className="card-body">
 
 
             <div className='form-group'>
@@ -136,14 +136,14 @@ function handleSubmit (e) {
             </div>
             </div>
 
-            <div class="row">
-            <div class="col-sm-6">
-            <div class="card">
-            <div class="card-header">
+            <div className="row">
+            <div className="col-sm-6">
+            <div className="card">
+            <div className="card-header">
             Return information    
             </div>
 
-            <div class="card-body">
+            <div className="card-body">
                            
                <div className='form-group'>           
                 
@@ -171,13 +171,13 @@ function handleSubmit (e) {
             </div>
 
 
-            <div class="row">
-            <div class="col-sm-6">
-            <div class="card">
-            <div class="card-header">
+            <div className="row">
+            <div className="col-sm-6">
+            <div className="card">
+            <div className="card-header">
             Journey information    
             </div>
-            <div class="card-body">
+            <div className="card-body">
 
             <div className='form-group'>
 

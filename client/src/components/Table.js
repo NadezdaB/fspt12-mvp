@@ -5,7 +5,7 @@ import "../App.css"
 const { DateTime } = require("luxon");
 
 
-export const Table = ({ columns, rows, deleteClick, showStats} ) => {
+export const Table = ({ columns, rows, deleteClick} ) => {
   const [activePage, setActivePage] = useState(1)
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
@@ -54,8 +54,8 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
   return (
     <>  
     <div>    
-       <table id="table_to_highlight">
-        <thead>
+       <table id="table_to_highlight" className="table table-sm table-hover table-bordered w-auto" >
+        <thead class="table-light">
           <tr>
             {columns.map((column) => {
               const sortIcon = () => {
@@ -69,7 +69,7 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
                 }
               }
               return (
-                <th key={column.accessor} id={column.accessor}>
+                <th key={column.accessor} id={column.accessor} data-width="100">
                   <span>{column.label}</span>
                   <button onClick={() => handleSort(column.accessor)}>{sortIcon()}</button>
                 </th>
@@ -79,7 +79,7 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
           <tr>
             {columns.map((column) => {
               return (
-                <th>
+                <th scope="col">
                   <input
                     key={`${column.accessor}-search`}
                     type="search"
@@ -125,7 +125,7 @@ export const Table = ({ columns, rows, deleteClick, showStats} ) => {
         <p>
           <button onClick={clearAll}>Clear all</button>
           <button onClick={() => deleteClick()}>Delete the selected row</button>
-          <button onClick={() => showStats()}>Show statistics</button>
+          {/* <button onClick={() => showStats()}>Show statistics</button> */}
         </p>
       
     </div>   

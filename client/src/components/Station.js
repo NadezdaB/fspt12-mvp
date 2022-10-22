@@ -27,8 +27,8 @@ const columns = [
   { accessor: 'Name', label: 'Name' },
   { accessor: 'Address', label: 'Address' },
   { accessor: 'station ID', label: 'Station ID' },
-  { accessor: 'x_coord', label: 'X coordinate of the station'},
-  { accessor: 'y_coord', label: 'Y coordinate of the station'}
+  { accessor: 'x_coord', label: 'Longitude'},
+  { accessor: 'y_coord', label: 'Latitude'}
 ]
 
 
@@ -36,16 +36,12 @@ const columns = [
     <div>
       <h2 className='text-center'>Bike stations</h2> 
     
-    <div className="container text-center">
+    <div className="container">
       <div className="row">
 
         <div className="col">
           <Table rows={stations} columns={columns}/>
-        </div>
-
-       <div className="col">
-        <h2 id='plotDistance' className='plot'>This is my plot</h2> 
-       </div>
+        </div>      
 
        </div>
     </div>

@@ -3,24 +3,11 @@
       background-color: #b8b8b8; 
 }
 
-.statistics {
-      background-color: chocolate ;
-}
-
-.addjourney {
-      background-color: aqua;
-}
-
-.ride {
-      background-color: chartreuse;
-}
-
 .App.leaflet-container {
       height: 5000px;
   }
 
 .plot {
-      height: 500px;
-      
+      height: 500px;      
 } 
   

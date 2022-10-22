@@ -1,7 +1,9 @@
-import React, {useEffect, useState } from 'react'
-import { Table } from "./Table"
+import React, {useEffect, useState } from 'react';
+import { Table } from "./Table";
 import Plotly from 'plotly.js-dist-min';
-import '../App.css'
+import '../App.css';
+const { DateTime } = require("luxon");
+
 
 
 export default function Journey() {
@@ -27,14 +29,15 @@ export default function Journey() {
    });
    }   
 
-   const showStatistics = async () => {
-
-    var xArray = journeys.map(journey => journey.CoveredDistance);
-    var yArray = journeys.map(journey => journey.id);
-    console.log("Xarray", xArray);
-    console.log(yArray);
+   const showStatistics = async() => {
+    
+    var xArray = journeys.map(journey => journey.CoveredDistance/1000);
+    var yArray = journeys.map(journey => journey.Duration/60);
+    // console.log("Xarray", xArray);
+    // console.log("Yarray",yArray);
     // Define Data
-    var data = [{
+    var data = [];
+    data = [{
       x: xArray,
       y: yArray,
       mode:"markers",
@@ -43,14 +46,81 @@ export default function Journey() {
 
     // Define Layout
     var layout = {
-      xaxis: {range: [0, 10000], title: "Covered distance, m"},
-      yaxis: {range: [0, 20000], title: "Number of occurrences"},
-      title: "Covered distances, histogram"
+      xaxis: {range: [0, Math.max(...xArray)*1.2], title: "Covered distance, km"},
+      yaxis: {range: [0, Math.max(...yArray)*1.2], title: "Duration, min"},
+      title: "Covered distances"
     };
 
     Plotly.newPlot('plotDistance',data, layout);
 
    }
+
+   const showStationStats = async () => {
+    const row = document.getElementsByClassName('highlight');
+   // the id of the row to be displayed
+    let rowID = row[0].getAttribute('id');
+    console.log(rowID);
+    let journey = journeys.filter(e => e.id == `${rowID}`);
+    console.log(journey[0].departureStationName);
+
+    let filterDeparture = journeys.filter(e => e.departureStationName === journey[0].departureStationName);
+    let filterReturn = journeys.filter(e => e.returnStationName === journey[0].returnStationName);
+    let depHours = filterDeparture.map(journey => parseInt(DateTime.fromISO(journey.departureTime).toFormat('HH'))-3);
+    let retHours = filterDeparture.map(journey => parseInt(DateTime.fromISO(journey.returnTime).toFormat('HH'))-3);
+
+    let depHoursRetStation = filterReturn.map(journey => parseInt(DateTime.fromISO(journey.departureTime).toFormat('HH'))-3);
+    let retHoursRetStation = filterReturn.map(journey => parseInt(DateTime.fromISO(journey.returnTime).toFormat('HH'))-3);  
+  
+   
+    /// histogram with dropdown menus 
+
+    let dataToPlot = [depHours, retHours,depHoursRetStation, retHoursRetStation];
+    let nameForPlot = [`Departure hours for departure station ${journey[0].departureStationName}`,
+    ...`Return hours for departure station ${journey[0].returnStationName}`,
+    ...`Departure hours for return station ${journey[0].returnStationName}`,
+    ...`Return hours for return station ${journey[0].returnStationName}`]
+    console.log(nameForPlot);
+
+    function makeTrace(i) {
+      return {
+          y: dataToPlot[i], 
+          type: "histogram",     
+          visible: i === 0,
+          name: nameForPlot[i],
+          xaxis: {title: "Hours"}
+
+      };
+    }
+
+    Plotly.newPlot('myDiv', [0, 1, 2, 3].map(makeTrace), {
+      updatemenus: [{
+          y: 0.8,
+          yanchor: 'top',
+          buttons: [{
+              method: 'restyle',
+              args: ['line.color', 'red'],
+              label: `return station ${journey[0].returnStationName}`
+          }, {
+              method: 'restyle',
+              args: ['line.color', 'blue'],
+              label: `departure station ${journey[0].departureStationName}`
+          }]
+      }, {
+          y: 1,
+          yanchor: 'top',
+          buttons: [{
+              method: 'restyle',
+              args: ['visible', [true, false, false, false]],
+              label: 'return hours'
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, true, false, false]],
+              label: 'departure hours'
+          }]
+      }],
+    });
+      }
+
 
 
    const deleteJourney = async () => {
@@ -81,23 +151,24 @@ export default function Journey() {
 
   return (
 
-    <div>
-  
-    <h2 className='text-center'>Bike journey statistics</h2> 
+    <div className= "bg-transparent">
+
+    <h2  className='text-center'>Bike journey statistics</h2> 
     
-    <div className="container text-center">
-      <div className="row">
+    <div className="container">
+        
+        <Table rows={journeys} columns={columns} deleteClick={deleteJourney}/>  
 
-        <div className="col">
-          <Table rows={journeys} columns={columns} deleteClick={deleteJourney} showStats={showStatistics}/>
-        </div>
+        <button onClick={showStatistics}>Show statistics</button>
+        <button onClick={showStationStats}>Show statistics on the selected stations</button> 
+      
+        <h2 id='plotDistance' className='plot'>Statistics on covered distance and duration</h2> 
+        <br/> 
+        <h2 id='myDiv'className='plot'>Statistics on selected departure and return stations</h2>      
 
-       <div className="col">
-        <h2 id='plotDistance' className='plot'>This is my plot</h2> 
-       </div>
-
-       </div>
     </div>
+    {/* <img className='bg-img' src={"https://images.unsplash.com/photo-1471506480208-91b3a4cc78be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YmlrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"} alt="bike"/> */}
+
     </div>
   )
 }
