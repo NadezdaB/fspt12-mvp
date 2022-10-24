@@ -41,7 +41,7 @@ export default function Journey() {
       x: xArray,
       y: yArray,
       mode:"markers",
-      type:"histogram"
+      type:"scatter"
     }];
 
     // Define Layout
@@ -151,11 +151,16 @@ export default function Journey() {
 
   return (
 
-    <div className= "bg-transparent">
-
-    <h2  className='text-center'>Bike journey statistics</h2> 
+    <div style={{ 
+      backgroundImage: `url("https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60")` ,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      width: '100vw',
+      height: '100vh'
     
-    <div className="container">
+    }}>
+
+    <h2  className='text-center'>Bike journey statistics</h2>     
         
         <Table rows={journeys} columns={columns} deleteClick={deleteJourney}/>  
 
@@ -166,8 +171,6 @@ export default function Journey() {
         <br/> 
         <h2 id='myDiv'className='plot'>Statistics on selected departure and return stations</h2>      
 
-    </div>
-    {/* <img className='bg-img' src={"https://images.unsplash.com/photo-1471506480208-91b3a4cc78be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YmlrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"} alt="bike"/> */}
 
     </div>
   )

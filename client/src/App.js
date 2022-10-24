@@ -13,10 +13,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-light">
 
-      <Navbar bg="success" expand="lg">
-      <Container>        
+      <Navbar className="bg-success" bg="success" expand="lg">Welcome to the Helsinki City Bike App
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -32,8 +31,9 @@ function App() {
 
           </Nav>
         </Navbar.Collapse>
-      </Container>
-    </Navbar>     
+
+    </Navbar> 
+    
         
 
 

@@ -33,7 +33,14 @@ const columns = [
 
 
   return (
-    <div>
+    <div style={{ 
+      backgroundImage: `url("https://i.pinimg.com/474x/36/85/a3/3685a32b9c86dc506e677f48bdbba89e.jpg")` ,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      width: '100vw',
+      //height: '100vh'
+    
+    }}>
       <h2 className='text-center'>Bike stations</h2> 
     
     <div className="container">

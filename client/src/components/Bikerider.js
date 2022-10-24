@@ -73,9 +73,18 @@ export default function Bikerider() {
    
 
     return (
-      <>      
-        
-      <h2 className='text-center'>Click on the map where you are and find the closest bike stations nearby</h2>
+      <>   
+      <div>   
+        {/* <div style={{ 
+        backgroundImage: `url("https://c4.wallpaperflare.com/wallpaper/587/656/862/digital-art-simple-background-minimalism-bicycle-wallpaper-preview.jpg")` ,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        width: '100vw',
+        height: '100vh'
+      
+      }}> */}
+
+      <h2>Click on the map where you are and find the closest bike stations nearby</h2>
       <label> Within how many meters would you like to display the stations?
         <input value={bounds} onChange={(e) => handleBounds(e)} />
         <button type="submit" onClick={(e) => handleSubmit(e)}>Show me the closest bike stations</button>
@@ -113,7 +122,7 @@ export default function Bikerider() {
           ))}
            
       </MapContainer>      
- 
+      </div>
     </> 
     ) 
   }

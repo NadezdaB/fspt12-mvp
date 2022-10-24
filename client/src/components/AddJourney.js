@@ -82,8 +82,8 @@ const addJourney = () => {
     })
   // Continue fetch request here   
    .then(res => res.json())
-
    alert("Journey added successfully!");
+
 
 }
    
@@ -96,9 +96,16 @@ function handleSubmit (e) {
 
 
   return (
-    <div className= "bg-primary">
+    <div className= "bg-light" style={{ 
+        backgroundImage: `url("https://i.pinimg.com/originals/64/7a/ea/647aea26acf0d3b235c0250a3425ea96.jpg")` ,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        width: '100vw',
+        height: '100vh'
+      
+      }}>
         
-        <h2>Add Your bike journey!</h2>
+        <h2 className='text-green'>Add Your bike journey!</h2>
 
         
             <form onSubmit={handleSubmit}>
@@ -106,7 +113,7 @@ function handleSubmit (e) {
             <div className="row">
             <div className="col-sm-6">
             <div className="card">
-            <div className="card-header">
+            <div className="card-header bg-success">
             Departure information    
             </div>
 
@@ -139,7 +146,7 @@ function handleSubmit (e) {
             <div className="row">
             <div className="col-sm-6">
             <div className="card">
-            <div className="card-header">
+            <div className="card-header bg-success">
             Return information    
             </div>
 
@@ -174,7 +181,7 @@ function handleSubmit (e) {
             <div className="row">
             <div className="col-sm-6">
             <div className="card">
-            <div className="card-header">
+            <div className="card-header bg-success">
             Journey information    
             </div>
             <div className="card-body">
@@ -194,7 +201,7 @@ function handleSubmit (e) {
             </div>
             </div>
             
-            <button className="btn btn-primary center" type="submit">Add your bike journey to the database</button>
+            <button className="btn btn-success center" type="submit">Add your bike journey to the database</button>
 
         </form>           
             

@@ -53,7 +53,7 @@ export const Table = ({ columns, rows, deleteClick} ) => {
    
   return (
     <>  
-    <div>    
+    <div className='container-fluid'>    
        <table id="table_to_highlight" className="table table-sm table-hover table-bordered w-auto" >
         <thead class="table-light">
           <tr>
