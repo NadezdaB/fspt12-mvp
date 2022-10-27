@@ -40,6 +40,46 @@ REACT_APP_OCD_API_KEY=
 2. Type `npm start` in the client directory to start front-end
 3. Type `mysql -u root -p`in the root directory, to connect to the MySQL database 
 
+## Setup
+
+### Dependencies
+
+- Run `npm install` in project directory. This will install server-related dependencies such as `express`.
+- `cd client` and run `npm install`. This will install client dependencies (React).
+
+### Database Prep
+
+- Access the MySQL interface in your terminal by running `mysql -u root -p`
+- Create a new database called facebook: `create database citybikes`
+- Add a `.env` file to the project folder of this repository containing the MySQL authentication information for MySQL user. For example:
+
+```bash
+  DB_HOST=localhost
+  DB_USER=root
+  DB_NAME=citybikes
+  DB_PASS=YOURPASSWORD
+  ```
+
+- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create 2 tables called 'Bike_stations' and 'Journey_data' in your database.
+
+- In your MySQL console, you can run `use citybikes;` and then `describe Bike_stations;` to see the structure of the bike station table. Same thing for the 'Journey_data' table. This is a description of the tables:
+
+![image of tables in MySQL](./tables.jpg)
+
+
+Here are the API routes (for the BE)
+
+- [API routes](https://docs.google.com/document/d/1uCJKWCHU2NAHr1hqVMKX6w5qcrjEZEmJrp3aHFBxYEU/edit?usp=sharing)
+
+## FE COMPONENTS
+
+This is a basic ideia of the components / pages
+![image of tables in MySQL](./components-sketch.jpg)
+
+### Development
+
+- Run `npm start` in project directory to start the Express server on port 5000
+- In another terminal, do `cd client` and run `npm start` to start the client in development mode with hot reloading in port 3006.
 
 <hr>
-<small>Last updated: 24 October 2022</small>
+<small>Last updated: 27 October 2022</small>
