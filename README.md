@@ -60,21 +60,17 @@ REACT_APP_OCD_API_KEY=
   DB_PASS=YOURPASSWORD
   ```
 
-- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create 2 tables called 'Bike_stations' and 'Journey_data' in your database.
+- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create 2 tables called 'bike_stations' and 'journey_data' in your database.
 
-- In your MySQL console, you can run `use citybikes;` and then `describe Bike_stations;` to see the structure of the bike station table. Same thing for the 'Journey_data' table. This is a description of the tables:
+- In your MySQL console, you can run `use citybikes;` and then `describe bike_stations;` to see the structure of the bike station table. Same thing for the 'journey_data' table. This is a description of the tables:
 
-![image of tables in MySQL](./tables.jpg)
+<!-- ![image of tables in MySQL](./tables.jpg) -->
 
-
-Here are the API routes (for the BE)
-
-- [API routes](https://docs.google.com/document/d/1uCJKWCHU2NAHr1hqVMKX6w5qcrjEZEmJrp3aHFBxYEU/edit?usp=sharing)
 
 ## FE COMPONENTS
 
-This is a basic ideia of the components / pages
-![image of tables in MySQL](./components-sketch.jpg)
+This is a basic idea of the components / pages
+<!-- ![image of tables in MySQL](./components-sketch.jpg) -->
 
 ### Development
 

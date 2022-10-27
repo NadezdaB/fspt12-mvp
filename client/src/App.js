@@ -6,7 +6,7 @@ import AddJourney from "./components/AddJourney";
 import Bikerider from './components/Bikerider';
 import Home from './components/Home';
 import NotFoundPage from "./components/Notfoundpage";
-import Container from 'react-bootstrap/Container';
+//import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
