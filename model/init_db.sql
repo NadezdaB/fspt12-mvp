@@ -21,3 +21,11 @@ CREATE TABLE `journey_data`(
     `Duration` BIGINT NOT NULL,
     PRIMARY KEY (id)
 );
+
+DROP TABLE if exists `users`;
+CREATE TABLE `users`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
